@@ -1,83 +1,288 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stories Site - Histoires courtes</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stories Site — Des histoires pour s'évader</title>
 
-    <!-- Style simple pour un début propre -->
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: #f7f7f7;
-            color: #333;
-            text-align: center;
-        }
+  <!-- Meta SEO basics -->
+  <meta name="description" content="Stories Site — Histoires courtes, séries et récits pour s'évader. Nouveautés chaque week-end.">
+  <meta property="og:title" content="Stories Site — Des histoires pour s'évader" />
+  <meta property="og:description" content="Plonge dans des histoires courtes et des séries originales. Nouveautés régulières." />
+  <meta property="og:type" content="website" />
 
-        header {
-            background: #4A4AEE;
-            color: white;
-            padding: 20px 0;
-        }
+  <!-- Favicon (modifiable) -->
+  <link rel="icon" href="/assets/favicon.png" />
 
-        h1 {
-            margin: 0;
-            font-size: 2.3rem;
-        }
+  <!-- Feel free to replace fonts with Google Fonts if desired -->
+  <style>
+    :root{
+      --bg:#0b0b0c;
+      --panel:#0f0f12;
+      --accent:#caa45b; /* warm gold */
+      --muted:#9aa1a6;
+      --glass: rgba(255,255,255,0.03);
+      --card:#111214;
+      --radius:14px;
+      --maxw:1100px;
+      --shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: radial-gradient(1200px 600px at 10% 10%, rgba(202,164,91,0.05), transparent), linear-gradient(180deg,#080809 0%, #0b0b0c 60%); color:#eaeaea}
 
-        p {
-            font-size: 1.2rem;
-        }
+    /* Top bar */
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:calc(var(--maxw) + 40px);margin:18px auto;background:transparent}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:54px;height:54px;border-radius:10px;background:linear-gradient(135deg,#2b2b2b,#141414);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.03);box-shadow: 0 6px 18px rgba(0,0,0,0.5)}
+    .logo svg{width:34px;height:34px;fill:var(--accent)}
+    .titles{line-height:1}
+    .site-title{font-size:1.2rem;font-weight:700;letter-spacing:0.6px}
+    .site-sub{font-size:0.78rem;color:var(--muted)}
 
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+    /* Right controls */
+    .controls{display:flex;align-items:center;gap:12px}
+    .subscribe-btn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--accent);padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer}
+    .subscribe-btn:hover{transform:translateY(-2px)}
 
-        footer {
-            margin-top: 50px;
-            padding: 20px;
-            background: #ddd;
-        }
-    </style>
+    .search{position:relative}
+    .search input{background:var(--glass);border:1px solid rgba(255,255,255,0.03);padding:10px 36px 10px 12px;border-radius:10px;color:inherit;min-width:220px}
+    .search button{position:absolute;right:6px;top:6px;border:0;background:transparent;color:var(--muted);padding:6px 8px;cursor:pointer}
 
-    <!-- 🔥 Google Analytics (à activer après création du compte GA4) -->
-    <!-- Remplace G-XXXXXXX par ton code de mesure Analytics -->
-    <!--
+    /* Main hero */
+    .hero{max-width:var(--maxw);margin:22px auto 16px;padding:30px;border-radius:18px;background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:var(--shadow);display:flex;gap:24px;align-items:center}
+    .hero-left{flex:1;padding:6px 10px}
+    .hero-right{flex:1;display:flex;align-items:center;justify-content:center}
+
+    .hero h1{font-size:2.6rem;margin:0 0 8px 0;line-height:1.02}
+    .hero p.lead{margin:0;color:var(--muted);font-size:1.05rem}
+
+    .cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:22px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:150px}
+    .card h3{margin:0 0 8px 0;color:var(--accent)}
+    .card p{margin:0;color:var(--muted)}
+    .card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,0.6);border-color:rgba(202,164,91,0.18)}
+
+    /* Featured section */
+    .featured{max-width:var(--maxw);margin:26px auto;padding:20px 14px}
+    .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .feat{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+    .feat h4{margin:0 0 10px 0;color:var(--accent)}
+    .feat p{color:var(--muted);font-size:0.95rem}
+
+    footer.site-foot{max-width:var(--maxw);margin:40px auto 80px;padding:18px;border-radius:12px;background:transparent;display:flex;justify-content:space-between;align-items:center;color:var(--muted)}
+    .links a{color:var(--muted);text-decoration:none;margin-right:12px}
+
+    /* About & legal pages container */
+    .legal{background:var(--card);padding:18px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);margin-top:20px}
+    .legal h3{margin:0 0 8px 0;color:var(--accent)}
+
+    /* Subscribe modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,2,2,0.6);z-index:60}
+    .modal .box{background:#0d0d0d;padding:22px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);max-width:420px;width:94%}
+    .modal input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);margin-top:10px}
+    .modal .row{display:flex;gap:8px;margin-top:12px}
+    .btn{background:var(--accent);color:#111;border:0;padding:10px 12px;border-radius:8px;cursor:pointer;font-weight:700}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    /* Cookie banner */
+    .cookie{position:fixed;left:18px;right:18px;bottom:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:space-between;gap:12px}
+
+    /* Responsive */
+    @media(max-width:920px){.feat-grid{grid-template-columns:repeat(2,1fr)}.hero{flex-direction:column}.cta-grid{grid-template-columns:1fr}.search input{min-width:140px}}
+    @media(max-width:560px){.feat-grid{grid-template-columns:1fr}.hero h1{font-size:1.6rem}.site-title{font-size:1rem}}
+
+  </style>
+</head>
+<body>
+
+  <!-- Top bar with subscribe (left) and search (right) -->
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <!-- simple book icon -->
+        <svg viewBox="0 0 24 24"><path d="M3 5c0-1.1.9-2 2-2h12v16H5c-1.1 0-2-.9-2-2V5zM7 5v12h10V3H7v2z"/></svg>
+      </div>
+      <div class="titles">
+        <div class="site-title">Stories Site</div>
+        <div class="site-sub">Des histoires... écrites pour s'évader</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="subscribe-btn" id="openSubscribe">S'abonner</button>
+
+      <div class="search" role="search" aria-label="Recherche d'histoires">
+        <input id="siteSearch" type="search" placeholder="Rechercher une histoire, un mot..." />
+        <button aria-label="Lancer la recherche">🔎</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <main class="hero" role="main">
+    <div class="hero-left">
+      <h1>Stories Site</h1>
+      <p class="lead">Des histoires courtes et des séries originales — des récits pour s'évader, rêver ou frissonner. Nouveautés chaque week-end.</p>
+
+      <div class="cta-grid" style="margin-top:24px">
+        <a class="card" href="/stories.html" id="linkStories" role="button" aria-label="Voir toutes les histoires">
+          <h3>Histoires</h3>
+          <p>Lire des récits indépendants, flash-fiction et contes.</p>
+        </a>
+
+        <a class="card" href="/series.html" id="linkSeries" role="button" aria-label="Voir les séries">
+          <h3>Séries</h3>
+          <p>Suivre des séries en épisodes et retrouver les épisodes précédents.</p>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="hero-right">
+      <!-- mysterious illustration placeholder -->
+      <div style="width:320px;height:320px;border-radius:16px;background:linear-gradient(135deg, rgba(202,164,91,0.06), rgba(255,255,255,0.02));display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.03)">
+        <div style="text-align:center;max-width:260px;padding:10px">
+          <h2 style="margin:0 0 8px 0;color:var(--accent)">Plongez</h2>
+          <p style="margin:0;color:var(--muted)">Un univers narratif à explorer. Histoires neuves ou échos d'anciennes légendes.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Featured / Preview grid -->
+  <section class="featured">
+    <h3 style="color:var(--accent);margin:0 0 12px 0">À la une</h3>
+    <div class="feat-grid">
+      <article class="feat">
+        <h4>Histoire du week-end</h4>
+        <p class="muted">Une courte histoire sélectionnée chaque week-end — ambiance mystère et frisson. (Bientôt)</p>
+      </article>
+      <article class="feat">
+        <h4>Série en cours</h4>
+        <p class="muted">Un épisode chaque semaine. Abonne-toi pour ne pas rater la suite.</p>
+      </article>
+      <article class="feat">
+        <h4>Genres</h4>
+        <p class="muted">Romance, Fantastique, Horreur, Aventure — explore par genre et trouve ton prochain récit.</p>
+      </article>
+    </div>
+
+    <div class="legal" style="margin-top:18px">
+      <h3>Prêt pour AdSense</h3>
+      <p class="muted">Ce site inclura une politique de confidentialité et un bandeau de consentement avant l'activation d'AdSense. Les pages obligatoires (À propos, Contact, Politique de confidentialité, Mentions légales) sont déjà prévues et seront ajoutées en un clic.</p>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <div>
+      © 2025 Stories Site
+    </div>
+    <div class="links">
+      <a href="/a-propos.html">À propos</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy.html">Politique confidentialité</a>
+    </div>
+  </footer>
+
+  <!-- Subscribe modal -->
+  <div class="modal" id="subscribeModal" aria-hidden="true">
+    <div class="box" role="dialog" aria-modal="true" aria-labelledby="subscribeTitle">
+      <h3 id="subscribeTitle">S'abonner à Stories Site</h3>
+      <p class="muted">Reçois un email quand une nouvelle histoire est publiée (optionnel).</p>
+      <input id="emailInput" type="email" placeholder="ton@mail.com" aria-label="Email pour s'abonner" />
+      <div class="row">
+        <button class="btn" id="saveSubscribe">S'abonner</button>
+        <button class="btn ghost" id="closeSubscribe">Fermer</button>
+      </div>
+      <p class="muted" style="margin-top:12px;font-size:0.9rem">(Les abonnements sont stockés localement dans le navigateur pour l'instant. Tu peux copier la liste des abonnés depuis la console si tu veux.)</p>
+    </div>
+  </div>
+
+  <!-- Cookie consent (simple) -->
+  <div class="cookie" id="cookieBox" role="dialog" aria-live="polite">
+    <div>
+      <strong>Cookies</strong>
+      <div style="color:var(--muted);font-size:0.95rem">Nous utilisons des cookies pour améliorer l'expérience et permettre les publicités si vous acceptez. <a href="/privacy.html" style="color:var(--accent);text-decoration:underline">Lire la politique</a></div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="btn" id="acceptCookies">Accepter</button>
+      <button class="btn ghost" id="declineCookies">Refuser</button>
+    </div>
+  </div>
+
+  <script>
+    // Simple subscribe storage (localStorage) - for later export
+    const openSubscribe = document.getElementById('openSubscribe');
+    const subscribeModal = document.getElementById('subscribeModal');
+    const closeSubscribe = document.getElementById('closeSubscribe');
+    const saveSubscribe = document.getElementById('saveSubscribe');
+    const emailInput = document.getElementById('emailInput');
+
+    openSubscribe.addEventListener('click', ()=>{subscribeModal.style.display='flex';subscribeModal.setAttribute('aria-hidden','false')});
+    closeSubscribe.addEventListener('click', ()=>{subscribeModal.style.display='none';subscribeModal.setAttribute('aria-hidden','true')});
+
+    saveSubscribe.addEventListener('click', ()=>{
+      const email = (emailInput.value || '').trim();
+      if(!email || !email.includes('@')){alert('Entre une adresse mail valide.');return}
+      let list = JSON.parse(localStorage.getItem('ss_subs')||'[]');
+      if(!list.includes(email)) list.push(email);
+      localStorage.setItem('ss_subs', JSON.stringify(list));
+      alert('Merci ! Email ajouté');
+      emailInput.value='';
+      subscribeModal.style.display='none';
+    });
+
+    // Cookie consent
+    const cookieBox = document.getElementById('cookieBox');
+    const acceptCookies = document.getElementById('acceptCookies');
+    const declineCookies = document.getElementById('declineCookies');
+    const accepted = localStorage.getItem('ss_cookies');
+    if(accepted==='accepted' || accepted==='declined') cookieBox.style.display='none';
+    acceptCookies.addEventListener('click', ()=>{localStorage.setItem('ss_cookies','accepted');cookieBox.style.display='none';/* Here we would load analytics/ads scripts */});
+    declineCookies.addEventListener('click', ()=>{localStorage.setItem('ss_cookies','declined');cookieBox.style.display='none';});
+
+    // Simple search (client-side) - searches titles on this page only
+    document.querySelector('.search button').addEventListener('click', ()=>runSearch());
+    document.getElementById('siteSearch').addEventListener('keydown', (e)=>{if(e.key==='Enter') runSearch()});
+    function runSearch(){
+      const q = document.getElementById('siteSearch').value.trim().toLowerCase();
+      if(!q){alert('Entre un mot pour la recherche.');return}
+      // For now, just point to the stories page with query string
+      window.location.href = '/stories.html?search=' + encodeURIComponent(q);
+    }
+
+    // Small animation: reveal hero
+    document.addEventListener('DOMContentLoaded', ()=>{
+      document.querySelectorAll('.card, .feat').forEach((el,i)=>{el.style.opacity=0;setTimeout(()=>{el.style.transition='all 550ms cubic-bezier(.2,.9,.3,1)';el.style.opacity=1;el.style.transform='translateY(0)';}, 120*i)});
+    });
+
+    // For debugging: function to export subscribers
+    function exportSubscribers(){
+      const list = JSON.parse(localStorage.getItem('ss_subs')||'[]');
+      console.log('Subscribers:', list.join('
+'));
+      return list;
+    }
+
+    // Accessibility: close subscribe modal on ESC
+    document.addEventListener('keydown', (e)=>{if(e.key==='Escape'){subscribeModal.style.display='none';subscribeModal.setAttribute('aria-hidden','true')}});
+
+  </script>
+
+  <!--
+    NOTES POUR ADDSENSE / GA4 :
+    - N'ajoute le script AdSense qu'apres acceptation de ton site par Google.
+    - Place le script AdSense fourni par Google dans <head> ou juste après <body> selon l'instruction, et respect le consentement cookie.
+
+    EXEMPLE GA4 (à activer après creation de la propriété) :
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){ dataLayer.push(arguments); }
-      gtag("js", new Date());
-      gtag("config", "G-XXXXXXX");
+      function gtag(){dataLayer.push(arguments)};
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXX', { 'anonymize_ip': true });
     </script>
-    -->
-</head>
-
-<body>
-
-    <header>
-        <h1>Bienvenue sur Stories Site 📚</h1>
-        <p>Des histoires courtes, simples et captivantes.</p>
-    </header>
-
-    <div class="container">
-        <h2>Le vrai design arrive bientôt…</h2>
-        <p>Mais tu peux déjà consulter le site et suivre son évolution !</p>
-
-        <p style="font-style: italic; color: #777;">La mise en place de Google AdSense sera prochainement active.</p>
-    </div>
-
-    <footer>
-        © 2025 Stories Site — Tous droits réservés.
-    </footer>
+  -->
 
 </body>
 </html>

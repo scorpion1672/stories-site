@@ -5,9 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stories Site — Des histoires pour s'évader</title>
 
-<meta name="description" content="Stories Site — Histoires courtes et séries pour s'évader.">
+<meta name="description" content="Stories Site — Histoires courtes et séries originales pour s'évader.">
 
 <style>
+:root{
+  --accent:#caa45b;
+  --card:#111214;
+  --muted:#9aa1a6;
+  --maxw:1100px;
+}
+
 body{
   margin:0;
   font-family:system-ui, sans-serif;
@@ -17,14 +24,6 @@ body{
 
 a{text-decoration:none;color:inherit}
 
-:root{
-  --accent:#caa45b;
-  --card:#111214;
-  --muted:#9aa1a6;
-  --maxw:1100px;
-}
-
-/* HEADER */
 header{
   max-width:var(--maxw);
   margin:20px auto;
@@ -43,7 +42,12 @@ header{
   cursor:pointer;
 }
 
-/* HERO */
+.ghost{
+  background:transparent;
+  border:1px solid #333;
+  color:var(--muted);
+}
+
 .hero{
   max-width:var(--maxw);
   margin:40px auto;
@@ -70,7 +74,6 @@ header{
 
 .card:hover{transform:translateY(-6px)}
 
-/* FOOTER */
 footer{
   max-width:var(--maxw);
   margin:60px auto 120px;
@@ -80,7 +83,7 @@ footer{
   color:var(--muted);
 }
 
-/* MODAL */
+/* POPUP */
 #popup{
   position:fixed;
   inset:0;
@@ -139,7 +142,6 @@ footer{
     <small style="color:var(--muted)">Des histoires écrites pour s'évader</small>
   </div>
 
-  <!-- BOUTON POPUP -->
   <button class="btn" onclick="document.getElementById('popup').style.display='flex'">
     S’abonner
   </button>
@@ -147,7 +149,9 @@ footer{
 
 <main class="hero">
   <h1>Bienvenue sur Stories Site</h1>
-  <p style="color:var(--muted)">Histoires courtes et séries originales. Nouveautés chaque week-end.</p>
+  <p style="color:var(--muted)">
+    Histoires courtes et séries originales. Nouveautés chaque week-end.
+  </p>
 
   <div class="grid">
     <a class="card" href="stories.html">
@@ -175,14 +179,20 @@ footer{
 <div id="popup">
   <div class="popup-box">
     <h3>S’abonner</h3>
-    <p style="color:var(--muted)">Recevoir un mail à chaque nouvelle histoire</p>
+    <p style="color:var(--muted)">
+      Recevoir un mail à chaque nouvelle histoire
+    </p>
 
-    <input type="email" placeholder="ton@email.com">
+    <input type="email" id="emailSub" placeholder="ton@email.com">
 
+    <p id="confirmMsg" style="display:none;color:var(--accent);margin-top:10px;">
+      Merci pour ton inscription ✨
+    </p>
+
+    <br>
+    <button class="btn" onclick="saveSubscription()">Valider</button>
     <br><br>
-    <button class="btn" onclick="document.getElementById('popup').style.display='none'">
-      Fermer
-    </button>
+    <button class="btn ghost" onclick="closePopup()">Fermer</button>
   </div>
 </div>
 
@@ -193,12 +203,45 @@ footer{
     <a href="politique.html" style="color:var(--accent)">Lire la politique</a>
   </div>
   <div>
-    <button class="btn" onclick="localStorage.setItem('cookie','ok');this.parentElement.parentElement.style.display='none'">Accepter</button>
+    <button class="btn" onclick="acceptCookie()">Accepter</button>
   </div>
 </div>
 
 <script>
-if(localStorage.getItem('cookie')){
+function closePopup(){
+  document.getElementById('popup').style.display='none';
+}
+
+function saveSubscription(){
+  const email = document.getElementById('emailSub').value.trim();
+  const msg = document.getElementById('confirmMsg');
+
+  if(!email || !email.includes('@')){
+    alert("Adresse email invalide");
+    return;
+  }
+
+  let list = JSON.parse(localStorage.getItem('stories_subs') || '[]');
+  if(!list.includes(email)){
+    list.push(email);
+    localStorage.setItem('stories_subs', JSON.stringify(list));
+  }
+
+  msg.style.display = "block";
+  document.getElementById('emailSub').value = "";
+
+  setTimeout(()=>{
+    closePopup();
+    msg.style.display = "none";
+  }, 2000);
+}
+
+function acceptCookie(){
+  localStorage.setItem('cookie_ok','yes');
+  document.getElementById('cookie').style.display='none';
+}
+
+if(localStorage.getItem('cookie_ok')){
   document.getElementById('cookie').style.display='none';
 }
 </script>

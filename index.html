@@ -27,7 +27,6 @@
 
     a{color:inherit;text-decoration:none}
 
-    /* TOP BAR */
     .topbar{
       max-width:var(--maxw);
       margin:20px auto;
@@ -57,7 +56,6 @@
       color:var(--muted);
     }
 
-    /* HERO */
     .hero{
       max-width:var(--maxw);
       margin:40px auto;
@@ -87,7 +85,6 @@
 
     .card:hover{transform:translateY(-6px)}
 
-    /* FOOTER */
     footer{
       max-width:var(--maxw);
       margin:60px auto 120px;
@@ -96,13 +93,47 @@
       justify-content:space-between;
       align-items:center;
       color:var(--muted);
-      position:relative;
-      z-index:10;
     }
 
     .links a{margin-left:12px}
 
-    /* COOKIE BANNER */
+    /* MODAL */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.7);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      z-index:10000;
+    }
+
+    .modal-box{
+      background:#111;
+      padding:24px;
+      border-radius:14px;
+      max-width:360px;
+      width:90%;
+      text-align:center;
+    }
+
+    .modal-box input{
+      width:100%;
+      padding:10px;
+      margin-top:12px;
+      border-radius:8px;
+      border:1px solid #333;
+      background:#0b0b0c;
+      color:#fff;
+    }
+
+    .modal-actions{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      margin-top:16px;
+    }
+
     .cookie{
       position:fixed;
       bottom:20px;
@@ -115,10 +146,8 @@
       justify-content:space-between;
       align-items:center;
       z-index:9999;
-      pointer-events:auto;
     }
 
-    /* RESPONSIVE */
     @media(max-width:700px){
       .grid{grid-template-columns:1fr}
     }
@@ -134,7 +163,7 @@
     </div>
 
     <div class="controls">
-      <button class="btn" id="openSubscribe">S’abonner</button>
+      <button class="btn" onclick="openSubscribe()">S’abonner</button>
     </div>
   </div>
 
@@ -164,10 +193,23 @@
     </div>
   </footer>
 
-  <!-- COOKIE CONSENT -->
+  <!-- MODAL ABONNEMENT -->
+  <div class="modal" id="subscribeModal">
+    <div class="modal-box">
+      <h3>S’abonner</h3>
+      <p style="color:var(--muted)">Recevoir un mail à chaque nouvelle histoire</p>
+      <input type="email" id="subEmail" placeholder="ton@email.com">
+      <div class="modal-actions">
+        <button class="btn" onclick="saveEmail()">Valider</button>
+        <button class="btn ghost" onclick="closeSubscribe()">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- COOKIE -->
   <div class="cookie" id="cookieBox">
     <div>
-      Cookies — nous améliorons l’expérience et affichons des publicités si vous acceptez.
+      Cookies — nous améliorons l’expérience.
       <a href="politique.html" style="color:var(--accent)">Lire la politique</a>
     </div>
     <div>
@@ -177,10 +219,30 @@
   </div>
 
   <script>
-    const box = document.getElementById('cookieBox');
-    const saved = localStorage.getItem('ss_cookie');
+    function openSubscribe(){
+      document.getElementById("subscribeModal").style.display="flex";
+    }
 
-    if(saved){ box.style.display='none'; }
+    function closeSubscribe(){
+      document.getElementById("subscribeModal").style.display="none";
+    }
+
+    function saveEmail(){
+      const email = document.getElementById("subEmail").value.trim();
+      if(!email || !email.includes("@")){
+        alert("Adresse email invalide");
+        return;
+      }
+      let list = JSON.parse(localStorage.getItem("ss_subs") || "[]");
+      if(!list.includes(email)) list.push(email);
+      localStorage.setItem("ss_subs", JSON.stringify(list));
+      alert("Merci pour ton abonnement !");
+      closeSubscribe();
+      document.getElementById("subEmail").value="";
+    }
+
+    const box = document.getElementById('cookieBox');
+    if(localStorage.getItem('ss_cookie')) box.style.display='none';
 
     document.getElementById('acceptCookies').onclick = ()=>{
       localStorage.setItem('ss_cookie','accepted');

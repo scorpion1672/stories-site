@@ -1,259 +1,207 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Stories Site — Des histoires pour s'évader</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stories Site — Des histoires pour s'évader</title>
 
-  <meta name="description" content="Stories Site — Histoires courtes, séries et récits pour s'évader. Nouveautés chaque week-end.">
+<meta name="description" content="Stories Site — Histoires courtes et séries pour s'évader.">
 
-  <style>
-    :root{
-      --bg:#0b0b0c;
-      --card:#111214;
-      --accent:#caa45b;
-      --muted:#9aa1a6;
-      --radius:14px;
-      --maxw:1100px;
-    }
+<style>
+body{
+  margin:0;
+  font-family:system-ui, sans-serif;
+  background:#0b0b0c;
+  color:#eaeaea;
+}
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:system-ui, sans-serif;
-      background:#0b0b0c;
-      color:#eaeaea;
-    }
+a{text-decoration:none;color:inherit}
 
-    a{color:inherit;text-decoration:none}
+:root{
+  --accent:#caa45b;
+  --card:#111214;
+  --muted:#9aa1a6;
+  --maxw:1100px;
+}
 
-    .topbar{
-      max-width:var(--maxw);
-      margin:20px auto;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:10px;
-    }
+/* HEADER */
+header{
+  max-width:var(--maxw);
+  margin:20px auto;
+  padding:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-    .site-title{font-size:1.6rem;font-weight:700}
-    .site-sub{font-size:0.9rem;color:var(--muted)}
+.btn{
+  background:var(--accent);
+  border:none;
+  padding:10px 16px;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+}
 
-    .controls{display:flex;gap:10px}
+/* HERO */
+.hero{
+  max-width:var(--maxw);
+  margin:40px auto;
+  padding:30px;
+  background:var(--card);
+  border-radius:16px;
+  text-align:center;
+}
 
-    .btn{
-      background:var(--accent);
-      border:none;
-      padding:8px 14px;
-      border-radius:8px;
-      font-weight:700;
-      cursor:pointer;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  margin-top:30px;
+}
 
-    .ghost{
-      background:transparent;
-      border:1px solid #333;
-      color:var(--muted);
-    }
+.card{
+  padding:20px;
+  background:#0f0f12;
+  border-radius:14px;
+  border:1px solid #222;
+  transition:0.3s;
+}
 
-    .hero{
-      max-width:var(--maxw);
-      margin:40px auto;
-      padding:30px;
-      background:var(--card);
-      border-radius:16px;
-      text-align:center;
-    }
+.card:hover{transform:translateY(-6px)}
 
-    .hero h1{font-size:2.4rem;margin-bottom:10px}
-    .hero p{color:var(--muted)}
+/* FOOTER */
+footer{
+  max-width:var(--maxw);
+  margin:60px auto 120px;
+  padding:10px;
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+}
 
-    .grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:20px;
-      margin-top:30px;
-    }
+/* MODAL */
+#popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.75);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:99999;
+}
 
-    .card{
-      padding:20px;
-      background:#0f0f12;
-      border-radius:14px;
-      border:1px solid #222;
-      transition:0.3s;
-    }
+.popup-box{
+  background:#111;
+  padding:24px;
+  border-radius:14px;
+  width:90%;
+  max-width:360px;
+  text-align:center;
+}
 
-    .card:hover{transform:translateY(-6px)}
+.popup-box input{
+  width:100%;
+  padding:10px;
+  margin-top:12px;
+  border-radius:8px;
+  border:1px solid #333;
+  background:#0b0b0c;
+  color:#fff;
+}
 
-    footer{
-      max-width:var(--maxw);
-      margin:60px auto 120px;
-      padding:10px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      color:var(--muted);
-    }
+/* COOKIE */
+#cookie{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  right:20px;
+  background:#111;
+  padding:14px;
+  border-radius:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:9999;
+}
 
-    .links a{margin-left:12px}
-
-    /* MODAL */
-    .modal{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.7);
-      display:none;
-      justify-content:center;
-      align-items:center;
-      z-index:10000;
-    }
-
-    .modal-box{
-      background:#111;
-      padding:24px;
-      border-radius:14px;
-      max-width:360px;
-      width:90%;
-      text-align:center;
-    }
-
-    .modal-box input{
-      width:100%;
-      padding:10px;
-      margin-top:12px;
-      border-radius:8px;
-      border:1px solid #333;
-      background:#0b0b0c;
-      color:#fff;
-    }
-
-    .modal-actions{
-      display:flex;
-      gap:10px;
-      justify-content:center;
-      margin-top:16px;
-    }
-
-    .cookie{
-      position:fixed;
-      bottom:20px;
-      left:20px;
-      right:20px;
-      background:#111;
-      padding:14px;
-      border-radius:12px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      z-index:9999;
-    }
-
-    @media(max-width:700px){
-      .grid{grid-template-columns:1fr}
-    }
-  </style>
+@media(max-width:700px){
+  .grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 
 <body>
 
-  <div class="topbar">
-    <div>
-      <div class="site-title">Stories Site</div>
-      <div class="site-sub">Des histoires… écrites pour s’évader</div>
-    </div>
-
-    <div class="controls">
-      <button class="btn" onclick="openSubscribe()">S’abonner</button>
-    </div>
+<header>
+  <div>
+    <strong>Stories Site</strong><br>
+    <small style="color:var(--muted)">Des histoires écrites pour s'évader</small>
   </div>
 
-  <main class="hero">
-    <h1>Bienvenue sur Stories Site</h1>
-    <p>Histoires courtes, séries originales et récits immersifs. Nouveautés chaque week-end.</p>
+  <!-- BOUTON POPUP -->
+  <button class="btn" onclick="document.getElementById('popup').style.display='flex'">
+    S’abonner
+  </button>
+</header>
 
-    <div class="grid">
-      <a class="card" href="stories.html">
-        <h3 style="color:var(--accent)">Histoires</h3>
-        <p>Récits indépendants et contes immersifs.</p>
-      </a>
+<main class="hero">
+  <h1>Bienvenue sur Stories Site</h1>
+  <p style="color:var(--muted)">Histoires courtes et séries originales. Nouveautés chaque week-end.</p>
 
-      <a class="card" href="series.html">
-        <h3 style="color:var(--accent)">Séries</h3>
-        <p>Des histoires en plusieurs épisodes.</p>
-      </a>
-    </div>
-  </main>
+  <div class="grid">
+    <a class="card" href="stories.html">
+      <h3 style="color:var(--accent)">Histoires</h3>
+      <p>Récits indépendants et immersifs.</p>
+    </a>
 
-  <footer>
-    <div>© 2025 Stories Site</div>
-    <div class="links">
-      <a href="a-propos.html">À propos</a>
-      <a href="contact.html">Contact</a>
-      <a href="politique.html">Politique de confidentialité</a>
-    </div>
-  </footer>
-
-  <!-- MODAL ABONNEMENT -->
-  <div class="modal" id="subscribeModal">
-    <div class="modal-box">
-      <h3>S’abonner</h3>
-      <p style="color:var(--muted)">Recevoir un mail à chaque nouvelle histoire</p>
-      <input type="email" id="subEmail" placeholder="ton@email.com">
-      <div class="modal-actions">
-        <button class="btn" onclick="saveEmail()">Valider</button>
-        <button class="btn ghost" onclick="closeSubscribe()">Fermer</button>
-      </div>
-    </div>
+    <a class="card" href="series.html">
+      <h3 style="color:var(--accent)">Séries</h3>
+      <p>Histoires en plusieurs épisodes.</p>
+    </a>
   </div>
+</main>
 
-  <!-- COOKIE -->
-  <div class="cookie" id="cookieBox">
-    <div>
-      Cookies — nous améliorons l’expérience.
-      <a href="politique.html" style="color:var(--accent)">Lire la politique</a>
-    </div>
-    <div>
-      <button class="btn" id="acceptCookies">Accepter</button>
-      <button class="btn ghost" id="declineCookies">Refuser</button>
-    </div>
+<footer>
+  <div>© 2025 Stories Site</div>
+  <div>
+    <a href="a-propos.html">À propos</a> ·
+    <a href="contact.html">Contact</a> ·
+    <a href="politique.html">Politique</a>
   </div>
+</footer>
 
-  <script>
-    function openSubscribe(){
-      document.getElementById("subscribeModal").style.display="flex";
-    }
+<!-- POPUP ABONNEMENT -->
+<div id="popup">
+  <div class="popup-box">
+    <h3>S’abonner</h3>
+    <p style="color:var(--muted)">Recevoir un mail à chaque nouvelle histoire</p>
 
-    function closeSubscribe(){
-      document.getElementById("subscribeModal").style.display="none";
-    }
+    <input type="email" placeholder="ton@email.com">
 
-    function saveEmail(){
-      const email = document.getElementById("subEmail").value.trim();
-      if(!email || !email.includes("@")){
-        alert("Adresse email invalide");
-        return;
-      }
-      let list = JSON.parse(localStorage.getItem("ss_subs") || "[]");
-      if(!list.includes(email)) list.push(email);
-      localStorage.setItem("ss_subs", JSON.stringify(list));
-      alert("Merci pour ton abonnement !");
-      closeSubscribe();
-      document.getElementById("subEmail").value="";
-    }
+    <br><br>
+    <button class="btn" onclick="document.getElementById('popup').style.display='none'">
+      Fermer
+    </button>
+  </div>
+</div>
 
-    const box = document.getElementById('cookieBox');
-    if(localStorage.getItem('ss_cookie')) box.style.display='none';
+<!-- COOKIE -->
+<div id="cookie">
+  <div>
+    Cookies utilisés pour améliorer l’expérience.
+    <a href="politique.html" style="color:var(--accent)">Lire la politique</a>
+  </div>
+  <div>
+    <button class="btn" onclick="localStorage.setItem('cookie','ok');this.parentElement.parentElement.style.display='none'">Accepter</button>
+  </div>
+</div>
 
-    document.getElementById('acceptCookies').onclick = ()=>{
-      localStorage.setItem('ss_cookie','accepted');
-      box.style.display='none';
-    }
-
-    document.getElementById('declineCookies').onclick = ()=>{
-      localStorage.setItem('ss_cookie','declined');
-      box.style.display='none';
-    }
-  </script>
+<script>
+if(localStorage.getItem('cookie')){
+  document.getElementById('cookie').style.display='none';
+}
+</script>
 
 </body>
 </html>

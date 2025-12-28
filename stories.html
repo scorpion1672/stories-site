@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Histoires — Stories Site</title>
+
+<style>
+body{
+  margin:0;
+  font-family:system-ui, sans-serif;
+  background:#0b0b0c;
+  color:#eaeaea;
+}
+
+a{color:inherit;text-decoration:none}
+
+header{
+  max-width:1100px;
+  margin:20px auto;
+  padding:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+input{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #333;
+  background:#111;
+  color:#fff;
+  width:260px;
+}
+
+main{
+  max-width:1100px;
+  margin:30px auto;
+  padding:10px;
+}
+
+.story{
+  background:#111214;
+  padding:20px;
+  border-radius:14px;
+  margin-bottom:20px;
+  border:1px solid #222;
+}
+
+.story h3{color:#caa45b;margin:0}
+.story p{color:#9aa1a6}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html"><strong>← Stories Site</strong></a>
+  <input type="text" id="search" placeholder="Rechercher une histoire...">
+</header>
+
+<main id="list">
+  <div class="story">
+    <h3>L’ombre du phare</h3>
+    <p>Une nuit, une lumière qui n’aurait jamais dû s’allumer…</p>
+  </div>
+
+  <div class="story">
+    <h3>Le dernier train</h3>
+    <p>Il partait chaque nuit à 00:07. Personne ne revenait.</p>
+  </div>
+
+  <div class="story">
+    <h3>La chambre 403</h3>
+    <p>Certains hôtels n’effacent jamais le passé.</p>
+  </div>
+</main>
+
+<script>
+const search = document.getElementById("search");
+const stories = document.querySelectorAll(".story");
+
+search.addEventListener("keyup", ()=>{
+  const value = search.value.toLowerCase();
+  stories.forEach(story=>{
+    story.style.display = story.innerText.toLowerCase().includes(value)
+      ? "block"
+      : "none";
+  });
+});
+</script>
+
+</body>
+</html>

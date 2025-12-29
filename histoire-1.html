@@ -6,51 +6,107 @@
 <title>Histoires — Stories Site</title>
 
 <style>
+:root{
+  --bg:#0b0b0c;
+  --card:#111214;
+  --accent:#caa45b;
+  --muted:#9aa1a6;
+}
+
 body{
   margin:0;
   font-family:system-ui, sans-serif;
-  background:#0b0b0c;
+  background:var(--bg);
   color:#eaeaea;
 }
 
-h1{
-  margin:30px;
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px;
 }
 
+header a{
+  color:var(--accent);
+  text-decoration:none;
+  font-weight:700;
+}
+
+input{
+  background:#111;
+  border:1px solid #222;
+  color:white;
+  padding:8px 12px;
+  border-radius:8px;
+}
+
+/* LISTE */
+.main{
+  max-width:900px;
+  margin:0 auto;
+  padding:20px;
+  position:relative;
+  z-index:2;
+}
+
+/* CARTE CLIQUABLE */
 .story{
   display:block;
-  max-width:800px;
-  margin:20px auto;
-  padding:20px;
-  background:#111214;
-  border-radius:14px;
+  margin-bottom:20px;
+  padding:22px;
+  background:var(--card);
+  border-radius:16px;
   border:1px solid #222;
   text-decoration:none;
   color:white;
-  transition:0.3s;
+  transition:0.25s;
+  position:relative;
+  z-index:5;
 }
 
 .story:hover{
   transform:translateY(-4px);
-  background:#caa45b;
-  color:black;
+  background:#16171a;
 }
 
-.story small{
-  display:block;
-  color:#9aa1a6;
+.story h3{
+  margin:0 0 8px;
+  color:var(--accent);
+}
+
+.story p{
+  margin:0;
+  color:var(--muted);
 }
 </style>
 </head>
 
 <body>
 
-<h1>📚 Histoires</h1>
+<header>
+  <a href="index.html">← Stories Site</a>
+  <input type="text" placeholder="Rechercher une histoire...">
+</header>
 
-<a class="story" href="histoire-1.html">
-  <strong>L’ombre du phare</strong>
-  <small>Mystère • 5 min de lecture</small>
-</a>
+<main class="main">
+
+  <a class="story" href="histoire-1.html">
+    <h3>L’ombre du phare</h3>
+    <p>Une nuit, une lumière qui n’aurait jamais dû s’allumer…</p>
+  </a>
+
+  <a class="story" href="histoire-2.html">
+    <h3>Le dernier train</h3>
+    <p>Il partait chaque nuit à 00:07. Personne ne revenait.</p>
+  </a>
+
+  <a class="story" href="histoire-3.html">
+    <h3>La chambre 403</h3>
+    <p>Certains hôtels n’effacent jamais le passé.</p>
+  </a>
+
+</main>
 
 </body>
 </html>

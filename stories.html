@@ -1,41 +1,124 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Histoires</title>
+  <meta charset="utf-8">
+  <title>Histoires — Stories Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#0b0b0c;
-  color:white;
-}
+  <style>
+    :root{
+      --bg:#0b0b0c;
+      --card:#111214;
+      --accent:#caa45b;
+      --muted:#9aa1a6;
+      --radius:14px;
+      --maxw:900px;
+    }
 
-a{
-  display:block;
-  padding:20px;
-  margin:20px;
-  background:#111;
-  border-radius:10px;
-  text-decoration:none;
-  color:white;
-  font-size:1.2rem;
-}
+    *{box-sizing:border-box}
 
-a:hover{
-  background:#caa45b;
-  color:black;
-}
-</style>
+    body{
+      margin:0;
+      font-family:system-ui, sans-serif;
+      background:var(--bg);
+      color:#eaeaea;
+    }
+
+    a{text-decoration:none;color:inherit}
+
+    /* HEADER */
+    header{
+      max-width:var(--maxw);
+      margin:20px auto;
+      padding:0 16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    header a{
+      color:var(--accent);
+      font-weight:700;
+      font-size:1.1rem;
+    }
+
+    header input{
+      background:#111;
+      border:1px solid #222;
+      padding:8px 12px;
+      border-radius:8px;
+      color:#eaeaea;
+      width:220px;
+    }
+
+    /* LIST */
+    main{
+      max-width:var(--maxw);
+      margin:30px auto 120px;
+      padding:0 16px;
+    }
+
+    .story{
+      background:linear-gradient(180deg,#111,#0f0f12);
+      border:1px solid #1f1f1f;
+      border-radius:16px;
+      padding:22px;
+      margin-bottom:18px;
+      transition:0.25s;
+      cursor:pointer;
+    }
+
+    .story:hover{
+      transform:translateY(-4px);
+      border-color:rgba(202,164,91,0.35);
+    }
+
+    .story h2{
+      margin:0 0 8px;
+      color:var(--accent);
+      font-size:1.3rem;
+    }
+
+    .story p{
+      margin:0;
+      color:var(--muted);
+    }
+  </style>
 </head>
 
 <body>
 
-<h1 style="margin:20px">Histoires</h1>
+  <!-- HEADER -->
+  <header>
+    <a href="/">← Accueil</a>
+    <input type="search" placeholder="Rechercher une histoire...">
+  </header>
 
-<a href="histoire-1.html">📖 L’ombre du phare</a>
+  <!-- STORIES -->
+  <main>
+
+    <a href="ombre-du-phare.html">
+      <article class="story">
+        <h2>L’ombre du phare</h2>
+        <p>Une nuit, une lumière qui n’aurait jamais dû s’allumer…</p>
+      </article>
+    </a>
+
+    <a href="dernier-train.html">
+      <article class="story">
+        <h2>Le dernier train</h2>
+        <p>Il partait chaque nuit à 00:07. Personne ne revenait.</p>
+      </article>
+    </a>
+
+    <a href="chambre-403.html">
+      <article class="story">
+        <h2>La chambre 403</h2>
+        <p>Certains hôtels n’effacent jamais le passé.</p>
+      </article>
+    </a>
+
+  </main>
 
 </body>
 </html>

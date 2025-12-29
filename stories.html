@@ -1,124 +1,85 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>Histoires — Stories Site</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
-    :root{
-      --bg:#0b0b0c;
-      --card:#111214;
-      --accent:#caa45b;
-      --muted:#9aa1a6;
-      --radius:14px;
-      --maxw:900px;
-    }
-
-    *{box-sizing:border-box}
-
     body{
       margin:0;
       font-family:system-ui, sans-serif;
-      background:var(--bg);
+      background:#0b0b0c;
       color:#eaeaea;
     }
 
-    a{text-decoration:none;color:inherit}
-
-    /* HEADER */
     header{
-      max-width:var(--maxw);
-      margin:20px auto;
-      padding:0 16px;
+      max-width:1000px;
+      margin:30px auto;
       display:flex;
       justify-content:space-between;
       align-items:center;
+      padding:0 20px;
     }
 
-    header a{
-      color:var(--accent);
-      font-weight:700;
-      font-size:1.1rem;
-    }
+    a{color:#caa45b;text-decoration:none}
 
-    header input{
+    input{
       background:#111;
       border:1px solid #222;
+      color:#fff;
       padding:8px 12px;
       border-radius:8px;
-      color:#eaeaea;
-      width:220px;
     }
 
-    /* LIST */
     main{
-      max-width:var(--maxw);
-      margin:30px auto 120px;
-      padding:0 16px;
+      max-width:1000px;
+      margin:20px auto;
+      padding:0 20px;
     }
 
     .story{
-      background:linear-gradient(180deg,#111,#0f0f12);
-      border:1px solid #1f1f1f;
-      border-radius:16px;
-      padding:22px;
-      margin-bottom:18px;
-      transition:0.25s;
-      cursor:pointer;
+      background:#111214;
+      border:1px solid #222;
+      border-radius:14px;
+      padding:20px;
+      margin-bottom:16px;
+      transition:0.3s;
     }
 
     .story:hover{
       transform:translateY(-4px);
-      border-color:rgba(202,164,91,0.35);
+      border-color:#caa45b;
     }
 
-    .story h2{
-      margin:0 0 8px;
-      color:var(--accent);
-      font-size:1.3rem;
+    .story h3{
+      margin:0;
+      color:#caa45b;
     }
 
     .story p{
-      margin:0;
-      color:var(--muted);
+      margin:6px 0 0;
+      color:#9aa1a6;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <a href="/">← Accueil</a>
-    <input type="search" placeholder="Rechercher une histoire...">
-  </header>
+<header>
+  <a href="index.html">← Accueil</a>
+  <input type="search" placeholder="Rechercher une histoire…">
+</header>
 
-  <!-- STORIES -->
-  <main>
+<main>
+  <h1>Histoires</h1>
 
-    <a href="ombre-du-phare.html">
-      <article class="story">
-        <h2>L’ombre du phare</h2>
-        <p>Une nuit, une lumière qui n’aurait jamais dû s’allumer…</p>
-      </article>
-    </a>
+  <a href="story-ombre-du-phare.html" class="story">
+    <h3>📘 L’ombre du phare</h3>
+    <p>Une nuit, une lumière qui n’aurait jamais dû s’allumer…</p>
+  </a>
 
-    <a href="dernier-train.html">
-      <article class="story">
-        <h2>Le dernier train</h2>
-        <p>Il partait chaque nuit à 00:07. Personne ne revenait.</p>
-      </article>
-    </a>
-
-    <a href="chambre-403.html">
-      <article class="story">
-        <h2>La chambre 403</h2>
-        <p>Certains hôtels n’effacent jamais le passé.</p>
-      </article>
-    </a>
-
-  </main>
+</main>
 
 </body>
 </html>

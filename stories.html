@@ -1,85 +1,113 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Histoires — Stories Site</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>Histoires — Stories Site</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <style>
-    body{
-      margin:0;
-      font-family:system-ui, sans-serif;
-      background:#0b0b0c;
-      color:#eaeaea;
-    }
+<style>
+body{
+  margin:0;
+  font-family:system-ui,sans-serif;
+  background:#0b0b0c;
+  color:#eaeaea;
+}
+a{text-decoration:none;color:inherit}
 
-    header{
-      max-width:1000px;
-      margin:30px auto;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:0 20px;
-    }
+header{
+  max-width:1100px;
+  margin:30px auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 20px;
+}
+header a{color:#caa45b;font-weight:700}
 
-    a{color:#caa45b;text-decoration:none}
+.search input{
+  background:#111;
+  border:1px solid #222;
+  color:#fff;
+  padding:10px 14px;
+  border-radius:10px;
+  width:260px;
+}
 
-    input{
-      background:#111;
-      border:1px solid #222;
-      color:#fff;
-      padding:8px 12px;
-      border-radius:8px;
-    }
+main{
+  max-width:900px;
+  margin:30px auto;
+  padding:0 20px;
+}
 
-    main{
-      max-width:1000px;
-      margin:20px auto;
-      padding:0 20px;
-    }
+.story-card{
+  background:#111214;
+  border:1px solid #222;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:20px;
+  cursor:pointer;
+  transition:0.3s;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.story-card:hover{
+  transform:translateY(-4px);
+  border-color:#caa45b;
+}
 
-    .story{
-      background:#111214;
-      border:1px solid #222;
-      border-radius:14px;
-      padding:20px;
-      margin-bottom:16px;
-      transition:0.3s;
-    }
+.story-info h2{
+  margin:0 0 6px;
+  color:#caa45b;
+}
+.story-info p{
+  margin:0;
+  color:#9aa1a6;
+}
 
-    .story:hover{
-      transform:translateY(-4px);
-      border-color:#caa45b;
-    }
-
-    .story h3{
-      margin:0;
-      color:#caa45b;
-    }
-
-    .story p{
-      margin:6px 0 0;
-      color:#9aa1a6;
-    }
-  </style>
+.read-btn{
+  background:#caa45b;
+  color:#111;
+  padding:10px 16px;
+  border-radius:10px;
+  font-weight:700;
+}
+</style>
 </head>
 
 <body>
 
 <header>
   <a href="index.html">← Accueil</a>
-  <input type="search" placeholder="Rechercher une histoire…">
+  <div class="search">
+    <input id="searchInput" type="search" placeholder="Rechercher une histoire...">
+  </div>
 </header>
 
-<main>
-  <h1>Histoires</h1>
+<main id="storyList">
 
-  <a href="story-ombre-du-phare.html" class="story">
-    <h3>📘 L’ombre du phare</h3>
-    <p>Une nuit, une lumière qui n’aurait jamais dû s’allumer…</p>
+  <a href="story-ombre-du-phare.html" class="story-card">
+    <div class="story-info">
+      <h2>L’ombre du phare</h2>
+      <p>Une nuit, une lumière qui n’aurait jamais dû s’allumer…</p>
+    </div>
+    <div class="read-btn">Lire</div>
   </a>
 
 </main>
+
+<script>
+const input = document.getElementById('searchInput');
+const stories = document.querySelectorAll('.story-card');
+
+input.addEventListener('input', ()=>{
+  const value = input.value.toLowerCase();
+  stories.forEach(card=>{
+    const text = card.innerText.toLowerCase();
+    card.style.display = text.includes(value) ? "flex" : "none";
+  });
+});
+</script>
 
 </body>
 </html>

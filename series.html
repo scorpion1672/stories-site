@@ -2,93 +2,72 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Séries — Stories Site</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body{
   margin:0;
-  font-family:system-ui, sans-serif;
+  font-family:system-ui,sans-serif;
   background:#0b0b0c;
   color:#eaeaea;
 }
-
 a{text-decoration:none;color:inherit}
-
 header{
   max-width:1100px;
-  margin:20px auto;
-  padding:10px;
+  margin:30px auto;
+  padding:0 20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
-
-input{
-  padding:10px;
-  border-radius:8px;
-  border:1px solid #333;
-  background:#111;
-  color:#fff;
-  width:260px;
-}
-
+.back{color:#caa45b;font-weight:600}
 main{
   max-width:1100px;
-  margin:30px auto;
-  padding:10px;
+  margin:20px auto 120px;
+  padding:0 20px;
 }
-
-.series{
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:20px;
+}
+.card{
   background:#111214;
-  padding:20px;
-  border-radius:14px;
-  margin-bottom:20px;
   border:1px solid #222;
+  border-radius:16px;
+  padding:20px;
+  transition:.3s;
 }
-
-.series h3{color:#caa45b;margin:0}
-.series p{color:#9aa1a6}
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 40px rgba(0,0,0,.6);
+}
+h1{color:#caa45b}
+p{color:#aaa}
 </style>
 </head>
 
 <body>
 
 <header>
-  <a href="index.html"><strong>← Stories Site</strong></a>
-  <input type="text" id="search" placeholder="Rechercher une série...">
+  <a class="back" href="index.html">← Accueil</a>
 </header>
 
-<main id="list">
-  <div class="series">
-    <h3>Les Chroniques du Néant</h3>
-    <p>Série • Fantastique • 6 épisodes</p>
-  </div>
+<main>
+<h1>Séries</h1>
+<p>Histoires en plusieurs chapitres. Choisis une série et plonge dedans.</p>
 
-  <div class="series">
-    <h3>Projet Lazarus</h3>
-    <p>Série • Science-fiction • 8 épisodes</p>
-  </div>
+<div class="grid">
 
-  <div class="series">
-    <h3>La Ville qui murmure</h3>
-    <p>Série • Mystère • En cours</p>
-  </div>
+<a class="card" href="serie-1.html">
+  <h3 style="color:#caa45b">Les Veilleurs</h3>
+  <p>Un phare, une côte battue par le vent… et quelque chose qui observe.</p>
+</a>
+
+<!-- Tu rajouteras d'autres séries ici -->
+
+</div>
 </main>
-
-<script>
-const search = document.getElementById("search");
-const series = document.querySelectorAll(".series");
-
-search.addEventListener("keyup", ()=>{
-  const value = search.value.toLowerCase();
-  series.forEach(item=>{
-    item.style.display = item.innerText.toLowerCase().includes(value)
-      ? "block"
-      : "none";
-  });
-});
-</script>
 
 </body>
 </html>

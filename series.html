@@ -4,69 +4,190 @@
 <meta charset="UTF-8">
 <title>Séries — Stories Site</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
+:root{
+  --accent:#caa45b;
+  --bg:#0b0b0c;
+  --card:#111214;
+  --muted:#9aa1a6;
+  --maxw:1200px;
+}
+
+*{box-sizing:border-box}
+
 body{
   margin:0;
-  font-family:system-ui,sans-serif;
-  background:#0b0b0c;
+  font-family:system-ui, sans-serif;
+  background:
+    radial-gradient(900px 500px at 80% 10%, rgba(202,164,91,0.08), transparent),
+    #0b0b0c;
   color:#eaeaea;
 }
+
 a{text-decoration:none;color:inherit}
+
+/* HEADER */
 header{
-  max-width:1100px;
-  margin:30px auto;
+  max-width:var(--maxw);
+  margin:30px auto 10px;
   padding:0 20px;
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
-.back{color:#caa45b;font-weight:600}
+
+header a{
+  color:var(--accent);
+  font-weight:700;
+}
+
+/* HERO */
+.hero{
+  max-width:var(--maxw);
+  margin:20px auto 40px;
+  padding:40px 20px;
+  text-align:center;
+}
+
+.hero h1{
+  margin:0;
+  font-size:2.6rem;
+}
+
+.hero p{
+  color:var(--muted);
+  max-width:640px;
+  margin:12px auto 0;
+  font-size:1.05rem;
+}
+
+/* GRID */
 main{
-  max-width:1100px;
-  margin:20px auto 120px;
+  max-width:var(--maxw);
+  margin:0 auto 120px;
   padding:0 20px;
 }
+
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:28px;
 }
-.card{
-  background:#111214;
-  border:1px solid #222;
-  border-radius:16px;
-  padding:20px;
-  transition:.3s;
+
+/* SERIES CARD */
+.series-card{
+  position:relative;
+  height:380px;
+  border-radius:20px;
+  overflow:hidden;
+  display:flex;
+  align-items:flex-end;
+  border:1px solid #1f1f1f;
+  transition:.4s;
+  background:linear-gradient(
+    180deg,
+    rgba(0,0,0,0.0),
+    rgba(0,0,0,0.9)
+  );
 }
-.card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 20px 40px rgba(0,0,0,.6);
+
+.series-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(202,164,91,0.6);
 }
-h1{color:#caa45b}
-p{color:#aaa}
+
+/* IMAGE */
+.series-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  filter:brightness(0.8);
+  z-index:0;
+}
+
+/* CONTENT */
+.series-content{
+  position:relative;
+  z-index:1;
+  padding:24px;
+}
+
+.series-content h2{
+  margin:0 0 6px;
+  color:var(--accent);
+  font-size:1.5rem;
+}
+
+.series-content p{
+  margin:0 0 14px;
+  color:#ddd;
+  font-size:0.95rem;
+  line-height:1.5;
+}
+
+.meta{
+  color:var(--muted);
+  font-size:0.85rem;
+  margin-bottom:14px;
+}
+
+.read-btn{
+  display:inline-block;
+  background:var(--accent);
+  color:#111;
+  padding:10px 18px;
+  border-radius:12px;
+  font-weight:700;
+  font-size:0.95rem;
+}
+
+/* SERIES IMAGES */
+#veilleurs::before{
+  background-image:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee");
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .hero h1{font-size:2rem}
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <a class="back" href="index.html">← Accueil</a>
+  <a href="index.html">← Accueil</a>
 </header>
 
+<section class="hero">
+  <h1>Séries</h1>
+  <p>
+    Des histoires en plusieurs chapitres. Reviens épisode après épisode
+    et découvre des univers qui prennent le temps de s’installer.
+  </p>
+</section>
+
 <main>
-<h1>Séries</h1>
-<p>Histoires en plusieurs chapitres. Choisis une série et plonge dedans.</p>
+  <div class="grid">
 
-<div class="grid">
+    <a href="serie-1.html" class="series-card" id="veilleurs">
+      <div class="series-content">
+        <h2>Les Veilleurs</h2>
+        <div class="meta">Série • Mystère • Chapitres multiples</div>
+        <p>
+          Un phare isolé. Une côte battue par le vent.
+          Et quelque chose qui observe depuis bien plus longtemps qu’on ne le croit.
+        </p>
+        <span class="read-btn">Voir la série</span>
+      </div>
+    </a>
 
-<a class="card" href="serie-1.html">
-  <h3 style="color:#caa45b">Les Veilleurs</h3>
-  <p>Un phare, une côte battue par le vent… et quelque chose qui observe.</p>
-</a>
+    <!-- Tu ajouteras d'autres séries ici sur le même modèle -->
 
-<!-- Tu rajouteras d'autres séries ici -->
-
-</div>
+  </div>
 </main>
 
 </body>
